@@ -11,7 +11,6 @@ import (
 
 	"fmt"
 
-	"path/filepath"
 	"os"
 	"regexp"
 	"encoding/json"
@@ -128,10 +127,11 @@ func main() {
 
 	fmt.Println("ALL FINISHED!")
 */
-	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	if err != nil {
-		log.Fatal(err)
-	}
+dir, err := os.Getwd()
+if err != nil {
+	fmt.Println(err)
+}
+fmt.Println(dir)
 
 	http.HandleFunc("/", indexFunc)
 	http.HandleFunc("/admin", adminSelected)
@@ -230,10 +230,11 @@ func indexFunc(w http.ResponseWriter, r *http.Request){
 
 	fmt.Println("Index")
 
-	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	if err != nil {
-		log.Fatal(err)
-	}
+    dir, err := os.Getwd()
+    if err != nil {
+        fmt.Println(err)
+    }
+    fmt.Println(dir)
 
 	Title := "E-voting API test"
 	MyRadioButtons := []RadioButton{
@@ -285,10 +286,11 @@ func DisplayRadioButtons(w http.ResponseWriter, r *http.Request){
 	}
 
 
-	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	if err != nil {
-		log.Fatal(err)
-	}
+    dir, err := os.Getwd()
+    if err != nil {
+        fmt.Println(err)
+    }
+    fmt.Println(dir)
 
 	t, err := template.ParseFiles(dir+"admin.html") //parse the html file homepage.html
 
@@ -346,10 +348,11 @@ func voterSelected(w http.ResponseWriter, r *http.Request){
 
 
 
-	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	if err != nil {
-		log.Fatal(err)
-	}
+    dir, err := os.Getwd()
+    if err != nil {
+        fmt.Println(err)
+    }
+    fmt.Println(dir)
 
 	fmt.Println("kakkkkk"+dir)
 
@@ -437,11 +440,11 @@ func adminSelected(w http.ResponseWriter, r *http.Request){
 
 
 
-
-	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	if err != nil {
-		log.Fatal(err)
-	}
+    dir, err := os.Getwd()
+    if err != nil {
+        fmt.Println(err)
+    }
+    fmt.Println(dir)
 
 	t, err := template.ParseFiles(dir+"/admin.html") //parse the html file homepage.html
 	if err != nil { // if there is an error
@@ -511,10 +514,12 @@ func voteSelected(w http.ResponseWriter, r *http.Request) {
 		PageTitle: Title,
 	}
 
-	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	if err != nil {
-		log.Fatal(err)
-	}
+    dir, err := os.Getwd()
+    if err != nil {
+        fmt.Println(err)
+    }
+    fmt.Println(dir)
+
 	// generate page by passing page variables into template
 	t, err := template.ParseFiles(dir+"/index.html") //parse the html file homepage.html
 	if err != nil { // if there is an error
@@ -566,10 +571,11 @@ func addVoter(w http.ResponseWriter, r *http.Request) {
 		PageTitle: Title,
 	}
 
-	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	if err != nil {
-		log.Fatal(err)
-	}
+    dir, err := os.Getwd()
+    if err != nil {
+        fmt.Println(err)
+    }
+    fmt.Println(dir)
 
 	// generate page by passing page variables into template
 	t, err := template.ParseFiles(dir+"/index.html") //parse the html file homepage.html
@@ -614,10 +620,11 @@ func getResults(w http.ResponseWriter, r *http.Request) {
 		PageTitle: Title,
 	}
 
-	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	if err != nil {
-		log.Fatal(err)
-	}
+    dir, err := os.Getwd()
+    if err != nil {
+        fmt.Println(err)
+    }
+    fmt.Println(dir)
 
 	// generate page by passing page variables into template
 	t, err := template.ParseFiles(dir+"/index.html") //parse the html file homepage.html

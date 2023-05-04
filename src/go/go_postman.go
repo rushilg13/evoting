@@ -289,7 +289,6 @@ func DisplayRadioButtons(w http.ResponseWriter, r *http.Request){
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(dir)
 
 	t, err := template.ParseFiles(dir+"admin.html") //parse the html file homepage.html
 
@@ -443,7 +442,6 @@ func adminSelected(w http.ResponseWriter, r *http.Request){
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(dir)
 
 	t, err := template.ParseFiles(dir+"/admin.html") //parse the html file homepage.html
 	if err != nil { // if there is an error

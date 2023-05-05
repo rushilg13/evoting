@@ -502,10 +502,9 @@ func adminSelected(w http.ResponseWriter, r *http.Request){
 func voteSelected(w http.ResponseWriter, r *http.Request) {
 
 
-	fmt.Println("vote")
+	fmt.Println("vote1")
 	a := regexp.MustCompile("=")
 	splitted := a.Split(r.URL.RawQuery, -1)
-
 	base_url := "http://localhost:8001"
 
 
@@ -532,16 +531,17 @@ func voteSelected(w http.ResponseWriter, r *http.Request) {
 	}
 
 	votes := &Vote{splitted[1], "36569675563270980802762714306156177901149277261141117320653538205171502807189", "6584969667293602680567734539575163142389903381909774456551685991814241531484"}
-
+	fmt.Println(votes)
 	//create json
 	b, err := json.Marshal(votes)
+	fmt.Println(string(b));
+
 	if err != nil {
 		fmt.Println(err)
-		return
 	}
 
-
 	var resp= reqPost(base_url+"/cast/", string(b))
+	fmt.Println(resp);
 
 	txResp := TxResponse{}
 	if err := json.Unmarshal([]byte(resp), &txResp); err != nil {
@@ -642,7 +642,9 @@ func getResults(w http.ResponseWriter, r *http.Request) {
 	var resp1= reqGet(base_url+"/votes/1")
 
 	txResp0 := votesStruct{}
-	if err := json.Unmarshal([]byte(resp0), &txResp0); err != nil {
+	if err := json.Unmarshal([]byte(resp0), &txResp0); 
+	
+	err != nil {
 		return
 	}
 
@@ -650,7 +652,7 @@ func getResults(w http.ResponseWriter, r *http.Request) {
 	if err := json.Unmarshal([]byte(resp1), &txResp1); err != nil {
 		return
 	}
-
+	fmt.Println(txResp0.Votes)
 	fmt.Fprintln(w, txResp0.Votes+","+txResp1.Votes)
 
 
